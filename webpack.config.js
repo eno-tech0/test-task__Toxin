@@ -11,11 +11,11 @@ const PATHS = {
 	dist: path.resolve(__dirname, './dist'),
 	assets: '/assets'
 };
-// !Нужно ли несколько точек входа?
+
 module.exports = {
 	context: PATHS.src,
 	entry: {
-		'./index': './index.js'
+		index: './index.js'
 	},
 	output: {
 		filename: '[name].js',
@@ -84,17 +84,8 @@ module.exports = {
 				exclude: [/node_modules/]
 			},
 			{
-				test: /\.(woff(2)?|ttf|eot|svg)$/,
-				include: [
-					PATHS.src + PATHS.assets + '/fonts'
-				],
-				use: {
-					loader: 'file-loader',
-					options: {
-						name: '[name].[ext]',
-						outputPath: 'assets/fonts',
-					},
-				},
+				test: /\.(woff|woff2|ttf|eot|svg)$/,
+				type: 'asset/inline'
 			},
 			{
 				test: /\.(png|jpg|jpeg|svg|gif)$/,

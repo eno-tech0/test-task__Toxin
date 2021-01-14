@@ -4,9 +4,10 @@ body {
 	height: 100vh;
 }
 .color-type__block {
-	display: flex;
-	justify-content: space-between;
-	max-width: 1480px;
+	margin-top: -49px;
+	margin-left: 40px;
+	display: grid;
+	grid-template-columns: 42.8% 46%;
 	
 	.color-blocks {
 		display: flex;

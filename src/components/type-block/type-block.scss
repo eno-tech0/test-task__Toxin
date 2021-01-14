@@ -1,15 +1,15 @@
 body {
-	font-family: sans-serif;
+	font-family: OpenSans-Regular, sans-serif;
 	font-style: normal;
 	font-weight: normal;
-	font-size: 14px;
+	font-size: 13px;
 	line-height: 24px;
 	color: rgba(31, 32, 65, 0.75);
 }
 
 h1,
 .type-block__h1  {
-	font-family: sans-serif;
+	font-family: OpenSans-Regular, sans-serif;
 	font-style: normal;
 	font-weight: bold;
 	font-size: 24px;
@@ -19,7 +19,7 @@ h1,
 
 h2,
 .type-block__h2 {
-	font-family: sans-serif;
+	font-family: OpenSans-Regular, sans-serif;
 	font-style: normal;
 	font-weight: bold;
 	font-size: 19px;
@@ -29,7 +29,7 @@ h2,
 
 h3,
 .type-block__h3 {
-	font-family: sans-serif;
+	font-family: OpenSans-Regular, sans-serif;
 	font-style: normal;
 	font-weight: bold;
 	font-size: 12px;
@@ -39,9 +39,12 @@ h3,
 }
 .type-block {
 	display: grid;
-	margin-bottom: 5rem;
-	max-width: 410px;
+	grid-template-columns: 10% 46%;
+	margin-bottom: 3.5rem;
 	&__title {
+		font-family: Montserrat-Regular, sans-serif;
+		font-style: normal;
+		font-weight: normal;
 		color: rgba(31, 32, 65, 0.25);
 		font-weight: normal;
 		margin-right: 30px;
@@ -51,4 +54,13 @@ h3,
 		text-align: left;
 		
 	}
+}
+.type-block__body {
+	font-family: Montserrat-Regular, sans-serif;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 13px;
+	line-height: 24px;
+	color: rgba(31, 32, 65, 0.75);
+	letter-spacing: 0.5px;
 }
