@@ -1,9 +1,11 @@
-block header
-
 doctype html
 html(lang="en")
 	head
 		meta(charset="UTF-8")
 		meta(name="viewport", content="width=device-width, initial-scale=1.0")
-		title #{titlt}
+		block title
 	body
+		block header
+		div.wrapper-container
+			block content
+		block footer

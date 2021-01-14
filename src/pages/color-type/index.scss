@@ -1,8 +1,20 @@
 body {
 	font-size: 19px;
+	width: 100vw;
+	height: 100vh;
 }
+.color-type__block {
+	display: flex;
+	justify-content: space-between;
+	max-width: 1480px;
+	
+	.color-blocks {
+		display: flex;
+		flex-direction: column;
+	}
 
-.logo {
-	width: 2.53rem;
-	height: 2.53rem;
+	.type-blocks {
+		
+	}
+	
 }

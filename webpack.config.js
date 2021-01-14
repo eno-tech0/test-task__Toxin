@@ -4,22 +4,18 @@ const path = require('path'),
 const HTMLWebpackPlugin = require('html-webpack-plugin'),
 	MiniCssExtractPlugin = require('mini-css-extract-plugin'),
 	CopyPlugin = require("copy-webpack-plugin"),
-	{CleanWebpackPlugin} = require('clean-webpack-plugin');
+	{ CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 const PATHS = {
 	src: path.resolve(__dirname, './src'),
 	dist: path.resolve(__dirname, './dist'),
 	assets: '/assets'
 };
-
+// !Нужно ли несколько точек входа?
 module.exports = {
 	context: PATHS.src,
 	entry: {
-		'./index': './index.js',
-		'./pages/color-type/index': './pages/color-type/index.js',
-		'./pages/cards/index': './pages/cards/index.js',
-		'./pages/headers-footers/index': './pages/headers-footers/index.js',
-		'./pages/form-elements/index': './pages/form-elements/index.js'
+		'./index': './index.js'
 	},
 	output: {
 		filename: '[name].js',
@@ -37,45 +33,45 @@ module.exports = {
 		new HTMLWebpackPlugin({
 			template: './index.pug',
 			filename: 'index.html',
-			inject: false
+			inject: true
 		}),
 		new HTMLWebpackPlugin({
 			template: './pages/color-type/index.pug',
 			filename: './pages/color-type/index.html',
-			inject: false
+			inject: true
 		}),
 		new HTMLWebpackPlugin({
 			template: './pages/cards/index.pug',
 			filename: './pages/cards/index.html',
-			inject: false
+			inject: true
 		}),
 		new HTMLWebpackPlugin({
 			template: './pages/headers-footers/index.pug',
 			filename: './pages/headers-footers/index.html',
-			inject: false
+			inject: true
 		}),
 		new HTMLWebpackPlugin({
 			template: './pages/form-elements/index.pug',
 			filename: './pages/form-elements/index.html',
-			inject: false
+			inject: true
 		}),
 		new MiniCssExtractPlugin(),
 		new CleanWebpackPlugin(),
 		new webpack.HotModuleReplacementPlugin(),
 		new CopyPlugin({
 			patterns: [
-				{from: PATHS.src + PATHS.assets, to: PATHS.dist + PATHS.assets}
+				{ from: PATHS.src + PATHS.assets, to: PATHS.dist + PATHS.assets }
 			]
 		})
 	],
 	module: {
 		rules: [
 			{
-				test: /\.css$/, 
+				test: /\.css$/,
 				use: [MiniCssExtractPlugin.loader, 'css-loader']
 			},
 			{
-				test: /\.scss$/, 
+				test: /\.scss$/,
 				use: ['style-loader', 'css-loader', 'sass-loader']
 			},
 			{
@@ -83,13 +79,35 @@ module.exports = {
 				loader: 'pug-loader'
 			},
 			{
-				test: /\.js$/, 
+				test: /\.js$/,
 				use: 'babel-loader',
 				exclude: [/node_modules/]
 			},
 			{
-				test: /\.(?:ico|gif|png|jpg|jpeg)$/i,
-				type: 'asset/resource',
+				test: /\.(woff(2)?|ttf|eot|svg)$/,
+				include: [
+					PATHS.src + PATHS.assets + '/fonts'
+				],
+				use: {
+					loader: 'file-loader',
+					options: {
+						name: '[name].[ext]',
+						outputPath: 'assets/fonts',
+					},
+				},
+			},
+			{
+				test: /\.(png|jpg|jpeg|svg|gif)$/,
+				exclude: [
+					PATHS.src + PATHS.assets + '/fonts'
+				],
+				use: {
+					loader: 'file-loader',
+					options: {
+						name: '[name].[ext]',
+						outputPath: 'assets/images',
+					},
+				},
 			}
 		]
 	}

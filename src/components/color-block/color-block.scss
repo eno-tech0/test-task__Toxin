@@ -1,0 +1,44 @@
+.color-block {
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	align-items: baseline;
+	&__item {
+		min-width: 70px;
+		min-height: 70px;
+		border-radius: 6px;
+		margin-bottom: 20px;
+		margin-right: 40px;
+		align-self: center;
+	}
+	&__dark-100 {
+		background: #1F2041;
+	}
+	&__dark-75 {
+		background: rgba(31, 32, 65, 0.75);
+	}
+	&__dark-50 {
+		background: rgba(31, 32, 65, 0.5);
+	}
+	&__dark-25 {
+		background: rgba(31, 32, 65, 0.25);
+	}
+	&__dark-5 {
+		background: rgba(31, 32, 65, 0.05);
+	}
+	&__purple {
+		background: #BC9CFF;
+	}
+	&__green {
+		background: #6FCF97;
+	}
+	&__description {
+	}
+	&__title {
+		font-weight: bold;
+		line-height: 2.5rem;
+	}
+	&__subtitle {
+
+	}
+}

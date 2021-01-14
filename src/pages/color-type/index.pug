@@ -1,10 +1,27 @@
-doctype html
-html(lang="en")
-	head
-		meta(charset="UTF-8")
-		meta(name="viewport", content="width=device-width, initial-scale=1.0")
-		title Color & Type
-	body
-		img.logo(src="../../assets/logo.png")
+extends ../wrapper/wrapper
 
-		script(src="./index.js")
+include ../../components/logo/logo
+include ../../components/color-block/color-block
+include ../../components/type-block/type-block
+
+block title
+	title Color & Type
+block header
+	+logo()
+block content
+	.color-type__block
+		.color-blocks
+			+color-block('Dark Shade 100%', '#1F2041', 'color-block__item color-block__dark-100')
+			+color-block('Dark Shade 75%', '#1F2041', 'color-block__item color-block__dark-75')
+			+color-block('Dark Shade 50%', '#1F2041', 'color-block__item color-block__dark-50')
+			+color-block('Dark Shade 25%', '#1F2041', 'color-block__item color-block__dark-25')
+			+color-block('Dark Shade 5%', '#1F2041', 'color-block__item color-block__dark-5')
+			+color-block('Purple', '#BC9CFF', 'color-block__item color-block__purple')
+			+color-block('Green', '#6FCF97', 'color-block__item color-block__green')
+		.type-blocks
+			+type-block('H1', 'This one is the sub-section or widget title', 'type-block type-block__h1')
+			+type-block('H2', 'Next one is the item title inside widgets', 'type-block type-block__h2')
+			+type-block('H3', 'This is a label or CTA text', 'type-block type-block__h3')
+			+type-block('Body', 'This is the body text which is used for most of the design, like paragraphs, lists, etc.', 'type-block type-block__body')
+
+
