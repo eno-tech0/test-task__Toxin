@@ -15,6 +15,7 @@ h1,
 	font-size: 24px;
 	line-height: 29px;
 	color: #1F2041;
+
 }
 
 h2,
@@ -22,25 +23,27 @@ h2,
 	font-family: OpenSans-Regular, sans-serif;
 	font-style: normal;
 	font-weight: bold;
-	font-size: 19px;
+	font-size: 18.7px;
 	line-height: 23px;
 	color: #1F2041;
+	letter-spacing: 0.2px;
 }
 
 h3,
 .type-block__h3 {
-	font-family: OpenSans-Regular, sans-serif;
+	font-family: Montserrat-Regular, sans-serif;
 	font-style: normal;
 	font-weight: bold;
 	font-size: 12px;
 	line-height: 15px;
 	text-transform: uppercase;
 	color: #1F2041;
+	letter-spacing: 0.26px;
 }
 .type-block {
 	display: grid;
 	grid-template-columns: 10% 46%;
-	margin-bottom: 3.5rem;
+	margin-bottom: 3.295rem;
 	&__title {
 		font-family: Montserrat-Regular, sans-serif;
 		font-style: normal;
@@ -63,4 +66,5 @@ h3,
 	line-height: 24px;
 	color: rgba(31, 32, 65, 0.75);
 	letter-spacing: 0.5px;
+	margin-top: -7px;
 }
