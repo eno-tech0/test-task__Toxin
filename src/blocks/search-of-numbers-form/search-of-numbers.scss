@@ -1,0 +1,25 @@
+.search-of-numbers {
+	max-width: 380px;
+	height: 374px;
+	&__date-selects {
+		display: grid;
+		grid-template-columns: calc(50% - (1.3rem/2)) calc(50% - (1.3rem/2));
+		grid-column-gap: 1.3rem;
+		margin-bottom: 20px;
+	}
+	&__title {
+		font-weight: 800;
+		margin-bottom: 12px;
+	}
+	&__guest-select {
+		margin-bottom: 30px;
+	}
+	&__submit-btn {
+		margin-bottom: 8px;
+	}
+}
+.form-element__title {
+	font-size: 11px;
+	letter-spacing: 0.06rem;
+	margin-bottom: 5px;
+}

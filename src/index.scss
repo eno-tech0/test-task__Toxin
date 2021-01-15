@@ -1,21 +1,38 @@
 * {
 	box-sizing: border-box;
+	word-wrap: normal;
+	direction: ltr;
+	-webkit-font-smoothing: antialiased;
+	text-rendering: optimizeLegibility;
+	-moz-osx-font-smoothing: grayscale;
+	font-feature-settings: 'liga';
 }
-
+button,
+input,
+optgroup,
+select,
+textarea {
+  padding: 0;
+  margin: 0;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  background-color: transparent;
+  color: inherit;
+  letter-spacing: inherit;
+}
 .pages {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
+	display: grid;
 	a {
 		text-decoration: none;
 		color: black;
 		font-size: 50px;
 		border-radius: 5px;
-		padding: 15px;
+		padding: 25px;
 		margin-bottom: 10px;
 		width: 400px;
 		text-align: center;
 		background-color: #fa9eb6;
+		line-height: 3rem;
 	}
 }

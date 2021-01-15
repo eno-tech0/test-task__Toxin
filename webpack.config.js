@@ -36,23 +36,23 @@ module.exports = {
 			inject: true
 		}),
 		new HTMLWebpackPlugin({
-			template: './pages/color-type/index.pug',
-			filename: './pages/color-type/index.html',
+			template: './pagesUI/color-type/index.pug',
+			filename: './pagesUI/color-type/index.html',
 			inject: true
 		}),
 		new HTMLWebpackPlugin({
-			template: './pages/cards/index.pug',
-			filename: './pages/cards/index.html',
+			template: './pagesUI/cards/index.pug',
+			filename: './pagesUI/cards/index.html',
 			inject: true
 		}),
 		new HTMLWebpackPlugin({
-			template: './pages/headers-footers/index.pug',
-			filename: './pages/headers-footers/index.html',
+			template: './pagesUI/headers-footers/index.pug',
+			filename: './pagesUI/headers-footers/index.html',
 			inject: true
 		}),
 		new HTMLWebpackPlugin({
-			template: './pages/form-elements/index.pug',
-			filename: './pages/form-elements/index.html',
+			template: './pagesUI/form-elements/index.pug',
+			filename: './pagesUI/form-elements/index.html',
 			inject: true
 		}),
 		new MiniCssExtractPlugin(),

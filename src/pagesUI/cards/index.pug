@@ -1,0 +1,14 @@
+extends ../wrapper/wrapper
+
+include ../../components/logo/logo
+include ../../blocks/search-of-numbers-form/search-of-numbers
+include ../../blocks/booking-form/booking-form
+
+block title
+	title Cards
+
+block header
+	+logo()
+block content
+	+search-of-numbers()
+	+booking-form()

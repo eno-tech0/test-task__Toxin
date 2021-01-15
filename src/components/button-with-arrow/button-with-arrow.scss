@@ -1,0 +1,36 @@
+.btn-with-arrow {
+	font-family: Montserrat-Regular, sans-serif;
+	letter-spacing: 0.06rem;
+	font-size: 11px;
+	width: 100%;
+	padding: 14px 48px;
+	border: none;
+	background: linear-gradient(180deg, #BC9CFF 0%, #8BA4F9 100%);
+	border-radius: 22px;
+	text-transform: uppercase;
+	color: #fff;
+	position: relative;
+}
+.btn-with-arrow::after {
+	content: 'arrow_forward';
+	font-family: MaterialIcons;
+	font-weight: normal;
+	font-style: normal;
+	font-size: 23px;
+	display: inline-block;
+	line-height: 1;
+	text-transform: none;
+	letter-spacing: normal;
+	word-wrap: normal;
+	white-space: nowrap;
+	direction: ltr;
+	-webkit-font-smoothing: antialiased;
+	text-rendering: optimizeLegibility;
+	-moz-osx-font-smoothing: grayscale;
+	font-feature-settings: 'liga';
+	position: absolute;
+	width: 8px;
+	height: 8px;
+	top: 8px;
+	color: #fff;
+}

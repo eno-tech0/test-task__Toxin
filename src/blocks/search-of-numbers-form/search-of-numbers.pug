@@ -1,0 +1,20 @@
+include ../../components/input-with-arrow/input-with-arrow
+include ../../components/button-with-arrow/button-with-arrow
+
+mixin search-of-numbers()
+	.search-of-numbers
+		.wrapper-for-forms
+			h1.search-of-numbers__title Найдём номера под ваши пожелания
+			.search-of-numbers__date-selects
+				.date-select__block
+					h3.form-element__title Прибытие
+					+input-with-arrow('ДД.ММ.ГГГГ', 'open-calendar')
+				.date-select__block
+					h3.form-element__title Выезд
+					+input-with-arrow('ДД.ММ.ГГГГ', 'open-calendar')
+			.search-of-numbers__guest-select
+				h3.form-element__title Гости
+				+input-with-arrow('Сколько гостей', 'open-select')
+			.search-of-numbers__submit-btn
+				+btn-with-arrow('Подобрать номер')
+

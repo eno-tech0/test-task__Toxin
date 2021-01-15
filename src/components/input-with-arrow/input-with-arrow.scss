@@ -1,0 +1,24 @@
+.input-with-arrow {
+	font-family: Montserrat-Regular, sans-serif;
+	letter-spacing: 0.02rem;
+	width: 100%;
+	padding: 13.4px 15px;
+	background: #FFFFFF;
+	border: 1px solid rgba(31, 32, 65, 0.25);
+	box-sizing: border-box;
+	border-radius: 4px;
+	position: relative;
+	text-align-last: left;
+}
+
+.input-with-arrow::after {
+	content: '';
+	position: absolute;
+	top: calc(50% - 6px);
+	right: 15.7px;
+	width: 6px;
+	height: 6px;
+	border-top: 2px solid rgba(31, 32, 65, 0.5);;
+	border-right: 2px solid rgba(31, 32, 65, 0.5);;
+	transform: rotate(135deg);
+}
