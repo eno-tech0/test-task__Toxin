@@ -1,0 +1,104 @@
+.calendar {
+	&-header {
+		display: grid;
+		grid-template-columns: 0.5fr 2fr 0.5fr;
+		margin-bottom: 12px;
+		.month-prev {
+			position: relative;
+			cursor: pointer;
+		}
+		.month-prev::after {
+			content: 'arrow_back';
+			font-family: MaterialIcons;
+			font-weight: normal;
+			font-style: normal;
+			font-size: 23px;
+			display: inline-block;
+			position: absolute;
+			width: 8px;
+			height: 8px;
+			top: -3px;
+			left: -9px;
+			color: #BC9CFF;;
+		}
+		.calendar-title {
+			font-family: Montserrat-Regular;
+			text-align: center;
+			margin-top: 0;
+		}
+		.month-next {
+			position: relative;
+			cursor: pointer;
+		}
+		.month-next::after {
+			content: 'arrow_forward';
+			font-family: MaterialIcons;
+			font-weight: normal;
+			font-style: normal;
+			font-size: 23px;
+			display: inline-block;
+			position: absolute;
+			width: 8px;
+			height: 8px;
+			top: -3px;
+			right: 8px;
+			color: #BC9CFF;;
+		}
+	}
+	&-body {
+		.days-of-week {
+			display: grid;
+			grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+			margin-bottom: 0px;
+			&__item {
+				padding: 12px;
+				font-family: Montserrat-Regular;
+				font-weight: bold;
+				font-size: 11px;
+				line-height: 15px;
+				text-align: center;
+				color: #BC9CFF;
+			}
+			&__item:last-child {
+				padding-right: 0;
+			}
+		}
+		.days {
+			display: grid;
+			grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+			grid-row-gap: 0px;
+			.calendar-day {
+				text-align: center;
+				font-family: Montserrat-Regular;
+				font-style: normal;
+				font-weight: normal;
+				font-size: 12px;
+				line-height: 15px;
+				color: rgba(31, 32, 65, 0.5);
+				padding: 12px;
+			}
+			.calendar-day.prev-day {
+				color: rgba(31, 32, 65, 0.25);
+			}
+			.calendar-day.active-day {
+				color: #fff;
+				background: linear-gradient(180deg, #BC9CFF 0%, #8BA4F9 100%);
+				border-radius: 50%;
+			}
+			.calendar-day.today {
+				color: #fff;
+				background: linear-gradient(180deg, #6FCF97 0%, #66D2EA 100%);
+				border-radius: 50%;
+			}
+
+		}
+	}
+	&-footer {
+		.clear-btn {
+
+		}
+		.confirm-btn {
+
+		}
+	}
+}
