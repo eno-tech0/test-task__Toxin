@@ -1,0 +1,63 @@
+.booking-form {
+	max-width: 380px;
+	&__info {
+		display: flex;
+		justify-content: space-between;
+	}
+	&__title {
+		display: flex;
+		align-items: flex-end;
+		h1 {
+			margin-bottom: 9px;
+		}
+		h3 {
+			font-size: 13px;
+			margin-right: 4px;
+		}
+		.lux {
+			color: #BC9CFF;
+			font-size: 12px;
+		}
+	}
+	&__price-of-number {
+		display: flex;
+		align-items: flex-end;
+		h3 {
+			letter-spacing: 0.1rem;
+			font-size: 13px;
+		}
+		p {
+			font-family: Montserrat-Regular;
+			font-size: 12px;
+			margin-bottom: 6px;
+		}
+	}
+	&__services-block {
+		margin-top: -11px;
+	}
+	&__services {
+		display: flex;
+		justify-content: space-between;
+		margin-bottom: 15px;
+		.services-title {
+			max-width: 70%;
+			font-family: Montserrat-Regular;
+			font-size: 14px;
+			line-height: 19px;
+			color: rgba(31, 32, 65, 0.75);
+		}
+	}
+	&__total-block {
+		display: grid;
+		grid-template-columns: 0.1fr 2fr 0.9fr;
+		.line {
+			height: 1px;
+			border-bottom: 0.5px dashed rgba(31, 32, 65, 0.25);
+			margin-top: 33px;
+		}
+		h2 {
+			font-family: Montserrat-Regular;
+			letter-spacing: 0.05rem;
+		}
+	}
+}
