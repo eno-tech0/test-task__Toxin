@@ -80,6 +80,11 @@
 			.calendar-day.prev-day {
 				color: rgba(31, 32, 65, 0.25);
 			}
+			.calendar-day.hover {
+				background: linear-gradient(180deg, #BC9CFF 0%, #8BA4F9 100%);
+				opacity: 0.25;
+				position: relative;
+			}
 			.calendar-day.active-day {
 				color: #fff;
 				background: linear-gradient(180deg, #BC9CFF 0%, #8BA4F9 100%);
@@ -94,11 +99,9 @@
 		}
 	}
 	&-footer {
-		.clear-btn {
-
-		}
-		.confirm-btn {
-
-		}
+		display: flex;
+		justify-content: space-between;
+		margin-top: 20px;
+		margin-right: -10px;
 	}
 }

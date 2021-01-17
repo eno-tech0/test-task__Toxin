@@ -11,5 +11,5 @@ import './pagesUI/headers-footers/index.scss';
 
 import Calendar from './components/calendar/calendar';
 
-const calendar = new Calendar(true);
+const calendar = new Calendar();
 

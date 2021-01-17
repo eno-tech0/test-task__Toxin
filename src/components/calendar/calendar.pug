@@ -1,3 +1,5 @@
+include ../confirm-btn/confirm-btn
+
 mixin calendar()
 	.calendar
 		.calendar-header
@@ -8,5 +10,5 @@ mixin calendar()
 			.days-of-week
 			.days
 		.calendar-footer
-			button.clear-btn
-			button.confirm-btn
+			+confirm-btn('Очистить', 'clear-btn')
+			+confirm-btn('Применить', 'apply-btn')
