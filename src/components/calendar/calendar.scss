@@ -76,6 +76,7 @@
 				line-height: 15px;
 				color: rgba(31, 32, 65, 0.5);
 				padding: 12px;
+				cursor: pointer;
 			}
 			.calendar-day.prev-day {
 				color: rgba(31, 32, 65, 0.25);
@@ -85,10 +86,44 @@
 				opacity: 0.25;
 				position: relative;
 			}
+			.calendar-day.hover::before {
+				z-index: -1;
+				content: "";
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				background: transparent;
+				background: linear-gradient(180deg, #bc9cff 0%, #8ba4f9 100%);
+				opacity: 0.25;
+				// width: 50%;
+			}
 			.calendar-day.active-day {
 				color: #fff;
 				background: linear-gradient(180deg, #BC9CFF 0%, #8BA4F9 100%);
 				border-radius: 50%;
+			}
+			.test {
+				background-color: red;
+			}
+			.calendar-day.selected-day {
+				position: relative;
+				background: linear-gradient(180deg, #BC9CFF 0%, #8BA4F9 100%);
+				opacity: 0.25;
+				// width: 50%;
+			}
+			.calendar-day.selected-day::before {
+				z-index: -1;
+				content: "";
+				position: absolute;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				background: transparent;
+				background: linear-gradient(180deg, #bc9cff 0%, #8ba4f9 100%);
+				opacity: 0.25;
+				width: 50%;
 			}
 			.calendar-day.today {
 				color: #fff;

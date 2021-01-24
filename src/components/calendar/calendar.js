@@ -1,11 +1,10 @@
 export default class Calendar {
 	constructor() {
-		this.now = new Date();
-		this.year = this.now.getFullYear();
-		this.month = this.now.getMonth();
-		this.dayOfWeek = this.now.getDay();
-		this.day = this.now.getDate();
-		this.date = new Date(this.year, this.month, 1);
+		this.now = new Date(); // Дата выбранная в календаре
+		this.today = new Date(); // Сегодняшняя дата
+		this.startDate;
+		this.endDate;
+		this.firstClick = true;
 
 		this.calendarBody = document.querySelector('.calendar-body .days');
 		this.daysOfWeekBody = document.querySelector('.calendar-body .days-of-week');
@@ -29,29 +28,41 @@ export default class Calendar {
 	}
 
 	renderCalendar() {
-		this.monthNameBody.textContent = `${this.monthNames[this.month]} ${this.year}`;
+		this.monthNameBody.textContent = `${this.monthNames[this.now.getMonth()]} ${this.now.getFullYear()}`;
 		this.renderDays();
 	}
 
 	renderDays() {
-		this.removeOld('.calendar-day')
+		this.removeOld('.calendar-day');
 
-		for (let i = 1; i <= 35; i ++) {
-			this.createDiv('calendar-day', this.calendarBody);
+		const firstDay = new Date(this.now.getTime());
+		const lastDay = new Date(this.now.getTime());
 
-			const newDays = document.querySelectorAll('.calendar-day');
-			let firstDay = new Date(this.year, this.month, 1).getDay();
-			if (firstDay > 0) firstDay -= 1;
-			else firstDay = 6;
+		firstDay.setDate(1);
+		let day = firstDay.getDay();
+		day == 0 ? day = 6 : day -= 1; // вс нулевой день в неделе, а в массиве - посследний
+		firstDay.setDate(firstDay.getDate() - day); // для отображения дней предыдущего месяца
 
-			const daysOfMonth = new Date(this.year, this.month + 1, 0).getDate();
+		lastDay.setMonth(lastDay.getMonth() + 1);
+		lastDay.setDate(1);
+		lastDay.setDate(lastDay.getDate() - 1);
 
-			for (let j = firstDay; j <= daysOfMonth + firstDay - 1; j++) {
-				if (newDays.length == 35) {
-					newDays[j].textContent = j - firstDay + 1;
-					if (newDays[j].innerText == this.day && this.month == this.now.getMonth()) newDays[j].classList.add('today');
-				}
-			}
+		while(firstDay < lastDay) {
+			for (let i = 0; i < 7; i++) {
+				const date = new Date(firstDay.getTime());
+				date.setHours(0, 0, 0, 0);
+
+				const elem = this.createDiv('calendar-day', this.calendarBody);
+				elem.textContent = firstDay.getDate();
+				elem.setAttribute('id', date.getTime());
+				
+				elem.addEventListener('click', (e) => this.selectDays(e, date.getTime()));
+
+				if (date.setHours(0, 0, 0, 0) == this.today.setHours(0, 0, 0, 0)) elem.classList.add('today');
+				if (date.getMonth() != this.now.getMonth()) elem.classList.add('prev-day');
+
+				firstDay.setDate(firstDay.getDate() + 1);
+			} 
 		}
 	}
 
@@ -64,54 +75,73 @@ export default class Calendar {
 		})
 	}
 
-	selectDays(e) {
-		const target = e.target;
+	selectDays(e, date) {
+		const elem = e.target;
+		const elems = document.querySelectorAll('.calendar-day');
 
-		if (target.classList.contains('calendar-day')) {
-			target.classList.toggle('active-day');
-		}
+		if (this.firstClick && date) {
+			if (this.endDate) {
+				if (this.endDate < date) {
+					this.startDate = this.endDate;
+					this.endDate = date;
+				} else this.startDate = date;
+			} else this.startDate = date;
 
-		const activeDays = document.querySelectorAll('.calendar-day.active-day'),
-				calendarDays = document.querySelectorAll('.calendar-day');
-
-		if (activeDays.length <= 2 && activeDays.length > 0) {
-			this.calendarBody.addEventListener('mousemove', this.setHoverEffect);
+			this.firstClick = !this.firstClick;
 		} else {
-			calendarDays.forEach(item => item.classList.remove('hover'));
-			this.calendarBody.removeEventListener('mousemove', this.setHoverEffect);
-			activeDays[0].classList.remove('active-day');
+			if (date) {
+				if (this.startDate > date) {
+					this.endDate = this.startDate;
+					this.startDate = date;
+				} else this.endDate = date;
+				
+				this.firstClick = !this.firstClick;
+			}
 		}
-	}
 
-	clearDate() {
-		const calendarDays = document.querySelectorAll('.calendar-day');
+		elems.forEach(item => {
+			item.classList.remove('hover', 'active-day', 'selected-day');
 
-		calendarDays.forEach(item => item.classList.remove('hover', 'active-day'));
-	}
+			if (!this.startDate && !this.endDate) {
+				item.classList.remove('hover', 'active-day', 'selected-day');
+			} else if (this.startDate && this.endDate) {
+				let timeStart = this.startDate + 86400000;
+				
+				while (timeStart < this.endDate) {
+					const rangeItem = document.getElementById(timeStart);
+					rangeItem.classList.add('hover');
+					timeStart += 86400000;
+				}
 
-	setHoverEffect(e) {
-		const target = e.target;
-		if (!target.classList.contains('active-day', 'today')) {
-			target.classList.add('hover');
-		}
+				if (item.id == this.startDate || item.id == this.endDate) {
+					item.classList.add('active-day');
+					item.classList.remove('hover');
+				} 
+
+			} else {
+				if (item.id == this.startDate) {
+					item.classList.add('active-day');
+				}
+			}
+		});
 	}
 
 	nextMonth() {
-		if (this.month >= 11) {
-			this.month = 0;
-			this.year++;
+		if (this.now.getMonth() >= 11) {
+			this.now.setMonth(0);
+			this.now.setFullYear(this.now.getFullYear() + 1);
 		} else {
-			this.month++;
+			this.now.setMonth(this.now.getMonth() + 1);
 		}
 		this.renderCalendar();
 	}
 
 	prevMonth() {
-		if (this.month <= 0) {
-			this.month = 11;
-			this.year--;
+		if (this.now.getMonth() <= 0) {
+			this.now.setMonth(11);
+			this.now.setFullYear(this.now.getFullYear() - 1);
 		} else {
-			this.month--;
+			this.now.setMonth(this.now.getMonth() - 1);
 		}
 		this.renderCalendar();
 	}
@@ -127,4 +157,4 @@ export default class Calendar {
 
 		return item;
 	}
-} 
+}
