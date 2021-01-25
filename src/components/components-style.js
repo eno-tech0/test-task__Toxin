@@ -4,5 +4,8 @@ import './button-with-arrow/button-with-arrow.scss';
 import './input-with-arrow/input-with-arrow.scss';
 import './calendar/calendar.scss';
 import './confirm-btn/confirm-btn.scss';
+import './input-text/input-text.scss';
+import './radio/radio.scss';
+import './toggle/toggle.scss';
 import './wrapper-for-forms.scss';
 import './logo/logo.scss';

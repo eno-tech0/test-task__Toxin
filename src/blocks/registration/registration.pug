@@ -1,0 +1,24 @@
+include ../../components/input-text/input-text
+include ../../components/radio/radio
+include ../../components/toggle/toggle
+include ../../components/button-with-arrow/button-with-arrow
+
+mixin registration()
+	.registration
+		.wrapper-for-forms
+			h1.form__title Регистрация аккаунта
+			.name-inputs
+				+input-text('text', 'Имя')
+				+input-text('text', 'Фамилия')
+			.radio-inputs
+				+radio('Мужчина', 'sex', 'male')
+				+radio('Женщина', 'sex', 'female')
+			.birthday-block
+				h3.form-element__title Дата Рождения
+				+input-text('text', 'ДД.ММ.ГГГГ')
+			.data-for-enter 
+				h3.form-element__title данные для входа в сервис
+				+input-text('email', 'Email')
+				+input-text('text', 'Пароль')
+			+toggle('Получать спецпредложения')
+			+btn-with-arrow('Перейти к оплате')
