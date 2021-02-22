@@ -1,2 +1,5 @@
-mixin toggle(title)
-	h3= title
+mixin toggle(title, check)
+	.toggle
+		input(type="checkbox" name="proposal" id="toggle" checked= check)
+		label(for="toggle")
+		h3= title

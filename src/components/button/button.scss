@@ -1,0 +1,36 @@
+.button {
+	border-radius: 25px;
+	font-family: Montserrat-Regular, sans-serif;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 12px;
+	line-height: 15px;
+	text-transform: uppercase;
+	background: transparent;
+	padding: 15px 26px;
+}
+.button.active {
+	color: #fff;
+	background: linear-gradient(180deg, #BC9CFF 0%, #8BA4F9 100%);
+}
+.button.disabled {
+	color: #fff;
+	background: linear-gradient(180deg, #BC9CFF 0%, #8BA4F9 100%);
+	opacity: 0.5;
+}
+.button.border-active {
+	color: #BC9CFF;
+	border: 2px solid #BC9CFF;
+}
+.button.border-disabled {
+	color: #BC9CFF;
+	border: 2px solid #e1d2ff;
+}
+.button.none-active {
+	padding: 0;
+	color: #BC9CFF;
+}
+.button.none-disabled {
+	padding: 0;
+	color: rgba(31, 32, 65, 0.5);
+}

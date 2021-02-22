@@ -1,46 +1,106 @@
 export default class Calendar {
-	constructor() {
+	constructor({container, renderCalendar, renderInputs, applyInputs}) {
 		this.now = new Date(); // Дата выбранная в календаре
 		this.today = new Date(); // Сегодняшняя дата
 		this.startDate;
 		this.endDate;
 		this.firstClick = true;
-
-		this.calendarBody = document.querySelector('.calendar-body .days');
-		this.daysOfWeekBody = document.querySelector('.calendar-body .days-of-week');
-		this.monthNameBody = document.querySelector('.calendar-title');
-		this.prev = document.querySelector('.month-prev');
-		this.next = document.querySelector('.month-next');
-		this.applyBtn = document.querySelector('.apply-btn');
-		this.clearBtn = document.querySelector('.clear-btn');
+		this.containerSelector = container;
+		this.container = document.querySelector(container);
 
 		this.daysOfWeeks = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'];
 		this.monthNames = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
+		
+		if (renderCalendar) this.onceRender();
+		if (renderInputs) {
+			this.renderInputs();
+		}
+		if (renderInputs || applyInputs) {
+			this.startInput = document.querySelector(`${container} .start-input`);
+			this.endInput = document.querySelector(`${container} .end-input`);
+	
+			this.startInput.addEventListener('click', () => this.onceRender());
+			this.endInput.addEventListener('click', () => this.onceRender());
+			this.position = true;
+		}
+	}
 
-		this.renderDaysOfWeek();
-		this.renderCalendar();
+	onceRender() {
+		const calendar = document.querySelector(`${this.containerSelector} .calendar`);
+		if (calendar) {
+			if (calendar.style.display == 'block') calendar.style.display = 'none';
+			else calendar.style.display = 'block';
+		} else {
+			this.renderCalendar();
+			this.renderDaysOfWeek();
+			this.render();
+		}
+	}
 
-		this.prev.addEventListener('click', () => this.prevMonth());
-		this.next.addEventListener('click', () => this.nextMonth());
-		this.applyBtn.addEventListener('click', () => this.confirmDate());
-		this.clearBtn.addEventListener('click', () => this.clearDate());
-		this.calendarBody.addEventListener('click', (e) => this.selectDays(e));
+	render() {
+		document.querySelector(`${this.containerSelector} .calendar-title`).textContent = `${this.monthNames[this.now.getMonth()]} ${this.now.getFullYear()}`;
+		this.renderDays();
+
+		const prev = document.querySelector(`${this.containerSelector} .month-prev`);
+		const next = document.querySelector(`${this.containerSelector} .month-next`);
+		const applyBtn = document.querySelector(`${this.containerSelector} .apply-btn`);
+		const clearBtn = document.querySelector(`${this.containerSelector} .clear-btn`);
+
+		prev.addEventListener('click', () => this.prevMonth());
+		next.addEventListener('click', () => this.nextMonth());
+		applyBtn.addEventListener('click', () => this.confirmDate());
+		clearBtn.addEventListener('click', () => this.clearDate());
 	}
 
 	renderCalendar() {
-		this.monthNameBody.textContent = `${this.monthNames[this.now.getMonth()]} ${this.now.getFullYear()}`;
-		this.renderDays();
+		const calendar = document.createElement('div');
+		calendar.classList.add(`${this.containerSelector.slice(1)}`, 'calendar');
+		calendar.style.display = 'block';
+
+		calendar.innerHTML = `
+		<div class="calendar-header">
+			<div class="month-prev"></div>
+			<h2 class="calendar-title"></h2>
+			<div class="month-next"></div>
+		</div>
+		<div class="calendar-body">
+			<div class="days-of-week"></div>
+			<div class="days"></div>
+		</div>
+		<div class="calendar-footer">
+			<button class="button none-active clear-btn">Очистить</button>
+			<button class="button none-active apply-btn">Применить</button>
+		</div>
+		`;
+		this.container.append(calendar);
+
+		if (this.position) {
+			this.container.style.position = 'relative';
+			calendar.classList.add('position-calendar');
+		}
+	}
+
+	renderInputs() {
+		const inputsBody = document.createElement('div');
+		inputsBody.classList.add('forms__date-selects');
+
+		inputsBody.innerHTML = `
+			<button class="input-with-arrow start-input">ДД.ММ.ГГГГ</button>
+			<button class="input-with-arrow end-input">ДД.ММ.ГГГГ</button>
+		`;
+
+		this.container.append(inputsBody);
 	}
 
 	renderDays() {
-		this.removeOld('.calendar-day');
+		this.removeOld(`${this.containerSelector} .calendar-day`);
 
 		const firstDay = new Date(this.now.getTime());
 		const lastDay = new Date(this.now.getTime());
 
 		firstDay.setDate(1);
 		let day = firstDay.getDay();
-		day == 0 ? day = 6 : day -= 1; // вс нулевой день в неделе, а в массиве - посследний
+		day == 0 ? day = 6 : day -= 1; // вс нулевой день в неделе, а в массиве - последний
 		firstDay.setDate(firstDay.getDate() - day); // для отображения дней предыдущего месяца
 
 		lastDay.setMonth(lastDay.getMonth() + 1);
@@ -52,7 +112,7 @@ export default class Calendar {
 				const date = new Date(firstDay.getTime());
 				date.setHours(0, 0, 0, 0);
 
-				const elem = this.createDiv('calendar-day', this.calendarBody);
+				const elem = this.createDiv('calendar-day', document.querySelector(`${this.containerSelector} .calendar-body .days`));
 				elem.textContent = firstDay.getDate();
 				elem.setAttribute('id', date.getTime());
 				
@@ -67,17 +127,16 @@ export default class Calendar {
 	}
 
 	renderDaysOfWeek() {
-		this.removeOld('.days-of-week__item')
+		this.removeOld(`${this.containerSelector} .days-of-week__item`)
 
 		this.daysOfWeeks.forEach(item => {
-			const day = this.createDiv('days-of-week__item', this.daysOfWeekBody);
+			const day = this.createDiv('days-of-week__item', document.querySelector(`${this.containerSelector} .calendar-body .days-of-week`));
 			day.textContent = item;
 		})
 	}
 
 	selectDays(e, date) {
 		const elem = e.target;
-		const elems = document.querySelectorAll('.calendar-day');
 
 		if (this.firstClick && date) {
 			if (this.endDate) {
@@ -89,39 +148,63 @@ export default class Calendar {
 
 			this.firstClick = !this.firstClick;
 		} else {
-			if (date) {
+			if (date && this.endDate) {
 				if (this.startDate > date) {
 					this.endDate = this.startDate;
 					this.startDate = date;
 				} else this.endDate = date;
-				
-				this.firstClick = !this.firstClick;
+			} else {
+				if (this.startDate > date) {
+					this.endDate = this.startDate;
+					this.startDate = date;
+				} else this.endDate = date;
 			}
+			this.firstClick = !this.firstClick;
 		}
 
+		this.addDaysClasses();
+	}
+
+	addDaysClasses() {
+		const elems = document.querySelectorAll(`${this.containerSelector} .calendar-day`);
+		
 		elems.forEach(item => {
-			item.classList.remove('hover', 'active-day', 'selected-day');
+			item.classList.remove('calendar-day_hover', 'calendar-day_active', 'calendar-day_selected-start', 'calendar-day_selected-end');
 
 			if (!this.startDate && !this.endDate) {
-				item.classList.remove('hover', 'active-day', 'selected-day');
+				item.classList.remove('calendar-day_hover', 'calendar-day_active', 'calendar-day_selected');
 			} else if (this.startDate && this.endDate) {
 				let timeStart = this.startDate + 86400000;
 				
 				while (timeStart < this.endDate) {
 					const rangeItem = document.getElementById(timeStart);
-					rangeItem.classList.add('hover');
+					rangeItem.classList.add('calendar-day_hover');
 					timeStart += 86400000;
 				}
 
 				if (item.id == this.startDate || item.id == this.endDate) {
-					item.classList.add('active-day');
-					item.classList.remove('hover');
+					item.classList.add('calendar-day_active');
+					if (item.id == this.startDate) {
+						item.classList.add('calendar-day_selected-start');
+					} else {
+						item.classList.add('calendar-day_selected-end');
+					}
+					if (item.id == this.startDate && item.id == this.endDate) {
+						item.classList.remove('calendar-day_selected-start', 'calendar-day_selected-end');
+					}
 				} 
+
+				if (item.classList.contains('today')) item.classList.remove('today');
 
 			} else {
 				if (item.id == this.startDate) {
-					item.classList.add('active-day');
+					item.classList.add('calendar-day_active');
 				}
+			}
+			if (item.id == this.today.setHours(0, 0, 0, 0) && 
+				!item.classList.contains('calendar-day_hover') &&
+				!item.classList.contains('calendar-day_active')) {
+				item.classList.add('today');
 			}
 		});
 	}
@@ -133,7 +216,7 @@ export default class Calendar {
 		} else {
 			this.now.setMonth(this.now.getMonth() + 1);
 		}
-		this.renderCalendar();
+		this.render();
 	}
 
 	prevMonth() {
@@ -143,7 +226,43 @@ export default class Calendar {
 		} else {
 			this.now.setMonth(this.now.getMonth() - 1);
 		}
-		this.renderCalendar();
+		this.render();
+	}
+
+	confirmDate() {
+		if (this.renderInputs) {
+			const start = new Date(this.startDate);
+			const end = new Date(this.endDate);
+
+			this.startInput.textContent = this.createDateString(start);
+			this.endInput.textContent = this.createDateString(end);
+		}
+	}
+
+	clearDate() {
+		const elems = document.querySelectorAll(`${this.containerSelector} .calendar-day`);
+		elems.forEach(item => {
+			item.classList.remove('calendar-day_hover', 'calendar-day_active', 'calendar-day_selected-start', 'calendar-day_selected-end');
+		});
+		this.startDate = null;
+		this.endDate = null;
+		this.firstClick = true;
+		this.now = new Date();
+
+		if (this.renderInputs) {
+			this.startInput.textContent = 'ДД.ММ.ГГГГ';
+			this.endInput.textContent = 'ДД.ММ.ГГГГ';
+		}
+	}
+
+	createDateString(date) {
+		return `${this.checkZero(date.getDate())}.${this.checkZero(date.getMonth())}.${date.getFullYear()}`;
+	}
+
+	checkZero(int) {
+		if (int < 10) {
+			return `0${int}`;
+		} else return int;
 	}
 
 	removeOld(selector) {

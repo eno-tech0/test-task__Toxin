@@ -11,5 +11,16 @@ import './pagesUI/headers-footers/index.scss';
 
 import Calendar from './components/calendar/calendar';
 
-const calendar = new Calendar();
+new Calendar({
+	container: '.search-of-numbers',
+	applyInputs: true
+})
+new Calendar({
+	container: '.booking-form',
+	applyInputs: true
+})
+new Calendar({
+	container: '.calendar-here',
+	renderCalendar: true
+});
 

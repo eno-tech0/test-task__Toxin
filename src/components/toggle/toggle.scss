@@ -1,0 +1,35 @@
+.toggle {
+	display: flex;
+	input[type=checkbox] {
+		display: none;
+	}
+	label {
+		margin-top: 9px;
+		margin-right: 10px;
+		width: 40px;
+		height: 20px;
+		position: relative;
+		cursor: pointer;
+		border-radius: 10px;
+		border: 1px solid rgba(31, 32, 65, 0.25);
+		background-color: #fff;
+		transition: .4s;
+	}
+	label:before {
+		position: absolute;
+		content: '';
+		background-color: rgba(31, 32, 65, 0.25);
+		border-radius: 50%;
+		width: 12px;
+		height: 12px;
+		top: calc(50% - 6px);
+		left: 4px;
+	}
+	input[type=checkbox]:checked + label {
+		border: 1px solid #BC9CFF;
+	}
+	input[type=checkbox]:checked + label:before {
+		background-color: #BC9CFF;
+		left: 22px;
+	}
+}

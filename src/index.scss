@@ -17,9 +17,11 @@ textarea {
   border: none;
   border-radius: 0;
   box-shadow: none;
-  background-color: transparent;
   color: inherit;
   letter-spacing: inherit;
+}
+button {
+	cursor: pointer;
 }
 .pages {
 	display: grid;

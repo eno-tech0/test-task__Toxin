@@ -1,0 +1,27 @@
+.radio {
+	display: flex;
+	input[type=radio] {
+		display: none;
+	}
+	label {
+		position: relative;
+		cursor: pointer;
+		width: 20px;
+		height: 20px;
+		border: 1px solid #BC9CFF;
+		border-radius: 50%;
+		margin-right: 10px;
+	}
+	input[type=radio]:checked + label:after {
+		content: '';
+		position: absolute;
+		display: inline-block;
+		width: 12px;
+		height: 12px;
+		border-radius: 50%;
+		background-color: #BC9CFF;
+		left: calc(50% - 6px);
+		top: calc(50% - 6px);
+	}
+	margin-right: 20px;
+}

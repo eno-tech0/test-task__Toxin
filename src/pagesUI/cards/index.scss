@@ -1,4 +1,7 @@
 .card-blocks {
 	display: grid;
-	grid-template-columns: 1fr 1fr 1fr 1fr;
+	grid-template-columns: 1fr 1fr 1fr;
+}
+.calendar-here {
+	max-width: 320px;
 }

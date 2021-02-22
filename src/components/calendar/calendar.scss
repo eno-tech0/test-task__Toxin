@@ -1,4 +1,10 @@
 .calendar {
+	padding: 23px 29px;
+	background: #FFFFFF;
+	border: 1px solid rgba(0, 0, 0, 0.12);
+	box-sizing: border-box;
+	box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.2);
+	border-radius: 4px;
 	&-header {
 		display: grid;
 		grid-template-columns: 0.5fr 2fr 0.5fr;
@@ -77,54 +83,62 @@
 				color: rgba(31, 32, 65, 0.5);
 				padding: 12px;
 				cursor: pointer;
+
+				&_active {
+					color: #fff;
+					background: linear-gradient(180deg, #BC9CFF 0%, #8BA4F9 100%);
+					border-radius: 50%;
+				}
+
+				&_selected-start {
+					position: relative;
+					&:before {
+						content: "";
+						position: absolute;
+						top: 0;
+						right: 0;
+						bottom: 0;
+						background: linear-gradient(180deg, #bc9cff 0%, #8ba4f9 100%);
+						opacity: 0.25;
+						width: 50%;
+					}
+				}
+				
+				&_selected-end {
+					position: relative;
+					&:before {
+						content: "";
+						position: absolute;
+						top: 0;
+						left: 0;
+						bottom: 0;
+						background: linear-gradient(180deg, #bc9cff 0%, #8ba4f9 100%);
+						opacity: 0.25;
+						width: 50%;
+					}
+				}
+
+				&_hover {
+					background: linear-gradient(180deg, #BC9CFF 0%, #8BA4F9 100%);
+					opacity: 0.25;
+					position: relative;
+					&:before {
+						z-index: -1;
+						content: "";
+						position: absolute;
+						top: 0;
+						left: 0;
+						right: 0;
+						bottom: 0;
+						background: linear-gradient(180deg, #bc9cff 0%, #8ba4f9 100%);
+						opacity: 0.25;
+					}
+				}
 			}
 			.calendar-day.prev-day {
 				color: rgba(31, 32, 65, 0.25);
 			}
-			.calendar-day.hover {
-				background: linear-gradient(180deg, #BC9CFF 0%, #8BA4F9 100%);
-				opacity: 0.25;
-				position: relative;
-			}
-			.calendar-day.hover::before {
-				z-index: -1;
-				content: "";
-				position: absolute;
-				top: 0;
-				left: 0;
-				right: 0;
-				bottom: 0;
-				background: transparent;
-				background: linear-gradient(180deg, #bc9cff 0%, #8ba4f9 100%);
-				opacity: 0.25;
-				// width: 50%;
-			}
-			.calendar-day.active-day {
-				color: #fff;
-				background: linear-gradient(180deg, #BC9CFF 0%, #8BA4F9 100%);
-				border-radius: 50%;
-			}
-			.test {
-				background-color: red;
-			}
-			.calendar-day.selected-day {
-				position: relative;
-				background: linear-gradient(180deg, #BC9CFF 0%, #8BA4F9 100%);
-				opacity: 0.25;
-				// width: 50%;
-			}
-			.calendar-day.selected-day::before {
-				z-index: -1;
-				content: "";
-				position: absolute;
-				top: 0;
-				right: 0;
-				bottom: 0;
-				background: transparent;
-				background: linear-gradient(180deg, #bc9cff 0%, #8ba4f9 100%);
-				opacity: 0.25;
-				width: 50%;
-			}
+
 			.calendar-day.today {
 				color: #fff;
 				background: linear-gradient(180deg, #6FCF97 0%, #66D2EA 100%);
@@ -139,4 +153,10 @@
 		margin-top: 20px;
 		margin-right: -10px;
 	}
+}
+
+.position-calendar {
+	position: absolute;
+	top: 12rem;
+	left: 1.2rem;
 }

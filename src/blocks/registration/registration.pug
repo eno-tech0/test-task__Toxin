@@ -2,6 +2,7 @@ include ../../components/input-text/input-text
 include ../../components/radio/radio
 include ../../components/toggle/toggle
 include ../../components/button-with-arrow/button-with-arrow
+include ../../components/button/button
 
 mixin registration()
 	.registration
@@ -11,8 +12,8 @@ mixin registration()
 				+input-text('text', 'Имя')
 				+input-text('text', 'Фамилия')
 			.radio-inputs
-				+radio('Мужчина', 'sex', 'male')
-				+radio('Женщина', 'sex', 'female')
+				+radio('Мужчина', 'sex', 'male', false)
+				+radio('Женщина', 'sex', 'female', true)
 			.birthday-block
 				h3.form-element__title Дата Рождения
 				+input-text('text', 'ДД.ММ.ГГГГ')
@@ -20,5 +21,9 @@ mixin registration()
 				h3.form-element__title данные для входа в сервис
 				+input-text('email', 'Email')
 				+input-text('text', 'Пароль')
-			+toggle('Получать спецпредложения')
+			+toggle('Получать спецпредложения', false)
 			+btn-with-arrow('Перейти к оплате')
+			.authorization
+				p Уже есть аккаунт на Toxin 
+				+button('border-active', 'Войти')
+

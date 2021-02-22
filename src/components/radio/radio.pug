@@ -1,4 +1,5 @@
-mixin radio(labelTitle, nameTitle, id)
+mixin radio(labelTitle, nameTitle, id, check)
 	.radio 
-		input(type='radio', name= nameTitle, id= id)
-		label(for= id)= labelTitle
+		input(type='radio', name= nameTitle, id= id, checked=check)
+		label(for= id)
+		span= labelTitle

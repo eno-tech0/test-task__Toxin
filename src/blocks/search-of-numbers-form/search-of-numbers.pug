@@ -5,13 +5,13 @@ mixin search-of-numbers()
 	.search-of-numbers
 		.wrapper-for-forms
 			h1.form__title Найдём номера под ваши пожелания
-			.forms__date-selects
+			div.forms__date-selects(class="calendar-here_search")
 				.date-select__block
 					h3.form-element__title Прибытие
-					+input-with-arrow('ДД.ММ.ГГГГ', 'open-calendar')
+					+input-with-arrow('ДД.ММ.ГГГГ', 'start-input')
 				.date-select__block
 					h3.form-element__title Выезд
-					+input-with-arrow('ДД.ММ.ГГГГ', 'open-calendar')
+					+input-with-arrow('ДД.ММ.ГГГГ', 'end-input')
 			.forms__guest-select
 				h3.form-element__title Гости
 				+input-with-arrow('Сколько гостей', 'open-select')
